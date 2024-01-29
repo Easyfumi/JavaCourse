@@ -36,11 +36,8 @@ public class Triangle extends Figure implements Polylineable, Moveable {
 
     @Override
     public void move(int x, int y) {
-        this.startedPoint.x = this.startedPoint.x + x;
-        this.startedPoint.y = this.startedPoint.y + y;
-        this.secondPoint.x = this.secondPoint.x + x;
-        this.secondPoint.y = this.secondPoint.y + y;
-        this.thirdPoint.x = this.thirdPoint.x + x;
-        this.thirdPoint.y = this.thirdPoint.y + y;
+        startedPoint.move(x,y);
+        secondPoint.move(x,y);
+        thirdPoint.move(x,y);
     }
 }

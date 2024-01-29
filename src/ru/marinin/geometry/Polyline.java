@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Polyline<T extends Point> implements Polylineable {
+public class Polyline<T extends Point> implements Polylineable, Moveable {
 
     private List<T> poitns;
 
@@ -69,5 +69,12 @@ public class Polyline<T extends Point> implements Polylineable {
     @Override
     public Polyline getPolyline() {
         return this;
+    }
+
+    @Override
+    public void move(int x, int y) {
+        for (T t:poitns) {
+            t.move(x, y);
+        }
     }
 }

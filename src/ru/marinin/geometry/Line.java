@@ -70,10 +70,8 @@ public class Line<T extends Point> implements Polylineable, Cloneable, Lengthabl
 
     @Override
     public void move(int x, int y) {
-        this.start.x = this.start.x + x;
-        this.start.y = this.start.y + y;
-        this.end.x = this.end.x + x;
-        this.end.y = this.end.y + y;
+        start.move(x, y);
+        end.move(x,y);
     }
 }
 

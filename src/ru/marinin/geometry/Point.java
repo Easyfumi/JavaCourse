@@ -2,7 +2,7 @@ package ru.marinin.geometry;
 
 import java.util.Objects;
 
-public class Point implements Cloneable {
+public class Point implements Cloneable, Moveable {
     public int x,y;
 
     public Point(int x, int y) {
@@ -50,4 +50,9 @@ public class Point implements Cloneable {
     }
 
 
+    @Override
+    public void move(int x, int y) {
+        this.x = this.x + x;
+        this.y = this.y + y;
+    }
 }

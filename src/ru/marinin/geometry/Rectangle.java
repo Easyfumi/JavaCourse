@@ -46,8 +46,7 @@ public class Rectangle extends Figure implements Polylineable{
 
     @Override
     public void move(int x, int y) {
-        this.startedPoint.x = this.startedPoint.x + x;
-        this.startedPoint.y = this.startedPoint.y + y;
+        startedPoint.move(x,y);
     }
 
 

@@ -29,8 +29,7 @@ public class Circle extends Figure {
 
     @Override
     public void move(int x, int y) {
-        this.startedPoint.x = this.startedPoint.x + x;
-        this.startedPoint.y = this.startedPoint.y + y;
+        startedPoint.move(x, y);
     }
 
 

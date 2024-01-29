@@ -323,6 +323,22 @@ class Tests {
         System.out.println("Move triangle x-> +100, y-> +100\n");
         triangle.move(100,100);
         System.out.println(group1);
+
+        Point point = new Point(1,1);
+        Point3D point3D = new Point3D(2,2,2);
+
+        Group group2 = Group.of(point, point3D, group1);
+        System.out.println(group2);
+        System.out.println("Move group x-> +1, y-> +1\n");
+        group2.move(1,1);
+        System.out.println(group2);
+
+        Polyline<Point> polyline = new Polyline<>(new Point(1,1), new Point(2,2), new Point(3,3), new Point(4,4));
+        Group group3 = Group.of(point, polyline);
+        System.out.println(group3);
+        System.out.println("Move group x-> -1, y-> -1\n");
+        group3.move(-1,-1);
+        System.out.println(group3);
     }
 
 }
