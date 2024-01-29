@@ -1,8 +1,6 @@
-package ru.marinin.DataStream;
+package ru.marinin.dataStream;
 
-import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
-import java.util.function.Function;
 
 public class StringSum implements BinaryOperator<String> {
     @Override

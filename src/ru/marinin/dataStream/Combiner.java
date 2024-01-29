@@ -1,9 +1,8 @@
-package ru.marinin.DataStream;
+package ru.marinin.dataStream;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.function.Supplier;
 
 public class Combiner implements BiConsumer<List<List<Integer>>, Integer> {
 

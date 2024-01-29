@@ -1,4 +1,4 @@
-package ru.marinin.DataStream;
+package ru.marinin.dataStream;
 
 import java.util.ArrayList;
 import java.util.List;
