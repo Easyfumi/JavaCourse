@@ -1,7 +1,11 @@
-package ru.marinin;
+package ru.marinin.main;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+
+        Tests.test_5_3_2();
     }
 }
+
+
