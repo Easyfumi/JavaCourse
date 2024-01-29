@@ -1,23 +1,21 @@
-package ru.marinin.main;
+package ru.marinin.utils;
 
 import ru.marinin.animals.Bird;
 import ru.marinin.animals.Meowable;
 import ru.marinin.entities.Box;
 import ru.marinin.entities.Storage;
 import ru.marinin.geometry.*;
-import ru.marinin.main.interfacesForUtils.Applyable;
-import ru.marinin.main.interfacesForUtils.Testable;
+import ru.marinin.utils.utilsService.Applyable;
+import ru.marinin.utils.utilsService.Testable;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
-import java.util.jar.JarEntry;
 
 import static java.lang.Integer.*;
 import static java.lang.Math.pow;
 
-public class Methods {
+public class Utils {
     public static Double sumAllObjects(Number... nums) {                    // 3.3.1 Сложение.
         double sum=0;
         for (Number num : nums) {

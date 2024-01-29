@@ -1,4 +1,4 @@
-package ru.marinin.main;
+package ru.marinin;
 import ru.marinin.cities.City;
 import ru.marinin.cities.CityWithTwoRoads;
 import ru.marinin.entities.Box;
@@ -7,19 +7,18 @@ import ru.marinin.geometry.Line;
 import ru.marinin.geometry.Point;
 import ru.marinin.geometry.Point3D;
 import ru.marinin.geometry.Polyline;
-import ru.marinin.main.interfacesForUtils.Applyable;
-import ru.marinin.main.interfacesForUtils.Testable;
+import ru.marinin.utils.Utils;
+import ru.marinin.utils.utilsService.Applyable;
+import ru.marinin.utils.utilsService.Testable;
 import ru.marinin.math.Fraction;
 import ru.marinin.people.Student;
 import ru.marinin.work.Department;
 import ru.marinin.work.Employee;
 
-import javax.swing.text.html.StyleSheet;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 class Tests {
     static public void test_cities() {
@@ -53,7 +52,7 @@ class Tests {
         Fraction i2 = new Fraction(11,3);
         double i3 = 3.21;
         BigInteger i4 = new BigInteger("12345678912345678912");
-        System.out.println(Methods.sumAllObjects(i1,i2,i3,i4));
+        System.out.println(Utils.sumAllObjects(i1,i2,i3,i4));
 
     }       // test of 4.1.3 Сложение из пакетов.
     static public void test_4_1_5() {
@@ -173,7 +172,7 @@ class Tests {
 
         Line<Point3D> point3DLine = new Line<>(p1,p2);
         System.out.println(point3DLine);
-        Methods.moveLine(point3DLine);
+        Utils.moveLine(point3DLine);
         System.out.println(point3DLine);
 
         Point p3 = new Point(-7,-7);
@@ -181,7 +180,7 @@ class Tests {
 
         Line<Point> pointLine = new Line<>(p3,p4);
         System.out.println(pointLine);
-        Methods.moveLine(pointLine);
+        Utils.moveLine(pointLine);
         System.out.println(pointLine);
     }
 
@@ -199,18 +198,18 @@ class Tests {
         // list.add(stringStorage);
         // list.add(nullStorage);
 
-        System.out.println(Methods.maxObjInStorage(list));
+        System.out.println(Utils.maxObjInStorage(list));
     }
 
     static public void test_5_2_3() {
         Box<Point> box = new Box<>();
-        Methods.pointInBox(box);
+        Utils.pointInBox(box);
         System.out.println(box.getObj());
     }
 
     static public void test_5_2_4() {
         List<Integer> list = new ArrayList<>();
-        Methods.initList(list);
+        Utils.initList(list);
         System.out.println(list);
     }
 
@@ -223,7 +222,7 @@ class Tests {
         Applyable<String, Integer> applyable1 = (o1) -> {
             return o1.length();
         };
-        System.out.println(Methods.function(list1, applyable1));
+        System.out.println(Utils.function(list1, applyable1));
         // 2nd
         List<Integer> list2 = new ArrayList<>();
         list2.add(1);
@@ -232,7 +231,7 @@ class Tests {
         Applyable<Integer, Integer> applyable2 = (o1) -> {
             return Math.abs(o1);
         };
-        System.out.println(Methods.function(list2, applyable2));
+        System.out.println(Utils.function(list2, applyable2));
         // 3rd
         List<int[]> list3 = new ArrayList<>();
         list3.add(new int[]{1,2,3});
@@ -241,7 +240,7 @@ class Tests {
         Applyable<int[], Integer> applyable3 = (o1) -> {
             return Arrays.stream(o1).max().getAsInt();
         };
-        System.out.println(Methods.function(list3, applyable3));
+        System.out.println(Utils.function(list3, applyable3));
     }
 
     static void test_5_3_2() {
@@ -253,7 +252,7 @@ class Tests {
         Testable<String> testable1 = (o1) -> {
             return o1.length()>2;
         };
-        System.out.println(Methods.filter(list1, testable1));
+        System.out.println(Utils.filter(list1, testable1));
         // 2nd
         List<Integer> list2 = new ArrayList<>();
         list2.add(1);
@@ -262,7 +261,7 @@ class Tests {
         Testable<Integer> testable2 = (o1) -> {
             return o1<0;
         };
-        System.out.println(Methods.filter(list2,testable2));
+        System.out.println(Utils.filter(list2,testable2));
         // 3rd
         List<int[]> list3 = new ArrayList<>();
         list3.add(new int[]{1,2,3});
@@ -275,7 +274,7 @@ class Tests {
             return true;
         };
 
-        for (int[] array : Methods.filter(list3,testable3)) {
+        for (int[] array : Utils.filter(list3,testable3)) {
             List<Integer> list = new ArrayList<>();
             for (int element : array) {
                 list.add(element);
