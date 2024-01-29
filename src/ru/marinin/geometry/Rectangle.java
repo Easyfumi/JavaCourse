@@ -41,7 +41,13 @@ public class Rectangle extends Figure implements Polylineable{
     }
     @Override
     public String toString() {
-        return "ru.marinin.geometry.Square in point " + startedPoint + " with height " + heigth + ", length " + length;
+        return "Square in point " + startedPoint + " with height " + heigth + ", length " + length;
+    }
+
+    @Override
+    public void move(int x, int y) {
+        this.startedPoint.x = this.startedPoint.x + x;
+        this.startedPoint.y = this.startedPoint.y + y;
     }
 
 

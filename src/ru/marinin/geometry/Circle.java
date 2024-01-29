@@ -27,5 +27,11 @@ public class Circle extends Figure {
         return "Circle with a middlePoint " + startedPoint + " and a radius of " + r;
     }
 
+    @Override
+    public void move(int x, int y) {
+        this.startedPoint.x = this.startedPoint.x + x;
+        this.startedPoint.y = this.startedPoint.y + y;
+    }
+
 
 }

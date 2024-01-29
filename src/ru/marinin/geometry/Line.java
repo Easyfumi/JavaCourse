@@ -3,7 +3,7 @@ package ru.marinin.geometry;
 
 import java.util.Objects;
 
-public class Line<T extends Point> implements Polylineable, Cloneable, Lengthable {
+public class Line<T extends Point> implements Polylineable, Cloneable, Lengthable, Moveable {
     private T start;
     private T end;
 
@@ -60,12 +60,20 @@ public class Line<T extends Point> implements Polylineable, Cloneable, Lengthabl
 
     @Override
     public String toString() {
-        return "Линия от " + start + " до " + end;
+        return "Line from " + start + " to " + end;
     }
 
 
     public int length() {
         return this.start.length(this.end);
+    }
+
+    @Override
+    public void move(int x, int y) {
+        this.start.x = this.start.x + x;
+        this.start.y = this.start.y + y;
+        this.end.x = this.end.x + x;
+        this.end.y = this.end.y + y;
     }
 }
 

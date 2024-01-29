@@ -5,7 +5,7 @@ import ru.marinin.geometry.Figure;
 import ru.marinin.geometry.Polyline;
 import ru.marinin.geometry.Polylineable;
 
-public class Square implements Polylineable, Areable {
+public class Square implements Polylineable, Areable, Moveable {
     private Point startedPoint;
     private int length;
     public Square(Point startedPoint, int length) {
@@ -36,7 +36,14 @@ public class Square implements Polylineable, Areable {
     }
     @Override
     public String toString() {
-        return "ru.marinin.geometry.Square in point " + startedPoint + " with side length " + length;
+        return "Square is " + this.getPolyline().toString();
+        //return "Square in point " + startedPoint + " with side length " + length;
+    }
+
+    @Override
+    public void move(int x, int y) {
+        this.startedPoint.x = this.startedPoint.x + x;
+        this.startedPoint.y = this.startedPoint.y + y;
     }
 
 

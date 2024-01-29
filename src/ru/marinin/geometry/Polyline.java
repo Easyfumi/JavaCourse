@@ -63,7 +63,7 @@ public class Polyline<T extends Point> implements Polylineable {
 
     @Override
     public String toString() {
-        return "Line " + poitns;
+        return "Polyline with point:  " + poitns;
     }
 
     @Override

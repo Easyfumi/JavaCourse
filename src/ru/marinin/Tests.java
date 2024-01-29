@@ -3,10 +3,7 @@ import ru.marinin.cities.City;
 import ru.marinin.cities.CityWithTwoRoads;
 import ru.marinin.entities.Box;
 import ru.marinin.entities.Storage;
-import ru.marinin.geometry.Line;
-import ru.marinin.geometry.Point;
-import ru.marinin.geometry.Point3D;
-import ru.marinin.geometry.Polyline;
+import ru.marinin.geometry.*;
 import ru.marinin.utils.Utils;
 import ru.marinin.utils.utilsService.Applyable;
 import ru.marinin.utils.utilsService.Testable;
@@ -281,6 +278,51 @@ class Tests {
             }
             System.out.print(list);
         }
+    }
+
+    static void test_group() {
+        Triangle triangle = new Triangle(new Point(1,1), new Point(10,10), new Point(10,1));
+
+//        System.out.println(triangle);
+//        System.out.println("Move x-> +10\n");
+//        triangle.move(10,0);
+//        System.out.println(triangle);
+
+        Line<Point> line = new Line<>(new Point(10,10), new Point(30,30));
+
+//        System.out.println(line);
+//        System.out.println("Move x-> -10, y-> -10\n");
+//        line.move(-10,-10);
+//        System.out.println(line);
+
+        Circle circle = new Circle(new Point(-20,-20), 10);
+
+//        System.out.println(circle);
+//        System.out.println("Move x-> +20, y-> +10\n");
+//        circle.move(20,10);
+//        System.out.println(circle);
+
+
+        Group group = Group.of(triangle, line, circle);
+        System.out.println(group);
+        System.out.println("Move group x-> +10, y-> +10\n");
+        group.move(10,10);
+        System.out.println(group);
+        System.out.println("Move circle x-> -30, y-> -30\n");
+        circle.move(-30,-30);
+        System.out.println(group);
+
+        Square square = new Square(new Point(0,0), 10);
+
+        Group group1 = Group.of(group, square);
+        System.out.println(group1);
+        System.out.println("Move group x-> -20, y-> +20\n");
+        group1.move(-20,20);
+        System.out.println(group1);
+
+        System.out.println("Move triangle x-> +100, y-> +100\n");
+        triangle.move(100,100);
+        System.out.println(group1);
     }
 
 }

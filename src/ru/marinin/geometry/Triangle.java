@@ -1,6 +1,6 @@
 package ru.marinin.geometry;
 
-public class Triangle extends Figure implements Polylineable {
+public class Triangle extends Figure implements Polylineable, Moveable {
     Point secondPoint;
     Point thirdPoint;
     public Triangle(Point startedPoint, Point secondPoint, Point thirdPoint) {
@@ -30,8 +30,17 @@ public class Triangle extends Figure implements Polylineable {
     }
     @Override
     public String toString() {
-        return "ru.marinin.geometry.Triangle has three points: " + startedPoint + " ; " + secondPoint + " ; " + thirdPoint + " with an area of " + getArea();
+        return "Triangle has three points: " + startedPoint + " ; " + secondPoint + " ; " + thirdPoint + " with an area of " + getArea();
     }
 
 
+    @Override
+    public void move(int x, int y) {
+        this.startedPoint.x = this.startedPoint.x + x;
+        this.startedPoint.y = this.startedPoint.y + y;
+        this.secondPoint.x = this.secondPoint.x + x;
+        this.secondPoint.y = this.secondPoint.y + y;
+        this.thirdPoint.x = this.thirdPoint.x + x;
+        this.thirdPoint.y = this.thirdPoint.y + y;
+    }
 }
