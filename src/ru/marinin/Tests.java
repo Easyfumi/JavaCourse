@@ -341,4 +341,20 @@ class Tests {
         System.out.println(group3);
     }
 
+    static void testStudentCache() {
+        Student student = new Student("Oleg", 4,4,5,5);
+        student.addGrade(4);
+        student.addGrade(3);
+        student.addGrade(5);
+        student.setName("Vasya");
+        System.out.println(student);
+        student.undo();
+        System.out.println(student);
+        student.removeGrade(3);
+        System.out.println(student);
+        student.undo();
+        System.out.println(student);
+        System.out.println(student.getLastSave());
+    }
+
 }
