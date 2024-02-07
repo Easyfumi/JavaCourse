@@ -7,52 +7,65 @@ import java.util.List;
 public class Student implements Compare, Cloneable {
     private String name;
     private List<Integer> grades;
-    private List<Student> cache = new ArrayList<>();
+    private Save save;
 
     public Student(String name, Integer... args) {
         this.name = name;
         this.grades = new ArrayList<>(Arrays.asList(args));
-        cache.add(this.clone());
     }
-    private Student(String name, List<Integer> gradesList) {
-        this.name = name;
-        this.grades = gradesList;
+    public void save(){
+        this.save = new Save(this);
+    }
+    public Save getSave() {
+        return save;
     }
     public String getName() {
         return name;
     }
     public void setName(String name) {
         this.name = name;
-        cache.add(this.clone());
     }
     public List<Integer> getGrades() {
         return new ArrayList(grades);
     }
-    public void addGrade(int grade) {
+    private void removeGrade(int index) {
+        grades.remove(index);
+    }
+
+    private void addGrade(int grade) {
         grades.add(grade);
-        cache.add(this.clone());
     }
-    public List<Student> getCache() {
-        return cache;
-    }
-    public void undo() {
-        if (cache.size()!=1)  {
-            this.name = cache.get(cache.size()-2).getName();
-            this.grades = cache.get(cache.size()-2).getGrades();
-            cache.remove(cache.size()-1);
+
+    public static class AddGradeCommand implements Command{
+        /// private static List<Command> undoList = new ArrayList<>();
+        private static List<Integer> addedGrades = new ArrayList<>();
+        int count = -1;
+        private Student student;
+
+        public AddGradeCommand(Student student) {
+            this.student = student;
         }
-    }
-    public Student getLastSave() {
-        return cache.get(cache.size()-1);
-    }
-    public void removeGrade(int index) {
-        try {
-            grades.remove(index);
-        } catch (IndexOutOfBoundsException e) {
+
+        @Override
+        public void add(int grade) {
+            addedGrades.add(grade);
+            student.addGrade(grade);
+            count++;
+        }
+
+        @Override
+        public void undo() {
+            if (count>=0) {
+                int grade = addedGrades.get(addedGrades.size()-1);
+                addedGrades.remove(addedGrades.size()-1);
+                int indexGrade = student.getGrades().lastIndexOf(grade);
+                student.removeGrade(indexGrade);
+                count--;
+            }
 
         }
-        cache.add(this.clone());
     }
+
     public double getMiddleGrade() {
         int sum = 0;
         if (grades.isEmpty())
@@ -80,7 +93,5 @@ public class Student implements Compare, Cloneable {
         if (diff<0) return -1;
         return 0;
     }
-    public Student clone() {
-        return new Student(name, new ArrayList<>(grades));
-    }
+
 }

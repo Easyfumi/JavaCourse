@@ -4,6 +4,8 @@ import ru.marinin.cities.CityWithTwoRoads;
 import ru.marinin.entities.Box;
 import ru.marinin.entities.Storage;
 import ru.marinin.geometry.*;
+
+import ru.marinin.people.Save;
 import ru.marinin.utils.Utils;
 import ru.marinin.utils.utilsService.Applyable;
 import ru.marinin.utils.utilsService.Testable;
@@ -343,18 +345,47 @@ class Tests {
 
     static void testStudentCache() {
         Student student = new Student("Oleg", 4,4,5,5);
-        student.addGrade(4);
-        student.addGrade(3);
-        student.addGrade(5);
-        student.setName("Vasya");
+        Student student1 = new Student("Ivan", 2,2,3,4);
+
+        student.save();
+        Save save = student.getSave();
+        System.out.println(save);
+
+        Student.AddGradeCommand command = new Student.AddGradeCommand(student);
+
+        command.add(2);
+        command.add(3);
+        command.add(4);
+
         System.out.println(student);
-        student.undo();
+        command.undo();
         System.out.println(student);
-        student.removeGrade(3);
+        command.undo();
         System.out.println(student);
-        student.undo();
+        command.undo();
+        command.undo();
+        command.undo();
+        command.undo();
         System.out.println(student);
-        System.out.println(student.getLastSave());
+
+        command = new Student.AddGradeCommand(student1);
+        command.add(5);
+        command.add(5);
+        command.add(5);
+
+        System.out.println(student1);
+        command.undo();
+        System.out.println(student1);
+        command.undo();
+        System.out.println(student1);
+        command.undo();
+        command.undo();
+        command.undo();
+        command.undo();
+        System.out.println(student1);
+
+
+
     }
 
 }
