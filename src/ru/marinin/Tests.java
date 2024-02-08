@@ -353,36 +353,22 @@ class Tests {
 
         Student.AddGradeCommand command = new Student.AddGradeCommand(student);
 
-        command.add(2);
-        command.add(3);
-        command.add(4);
+        command.add(x -> x.addGrade(2));
+        command.add(x -> x.addGrade(3));
+        command.add(x -> x.addGrade(4));
 
         System.out.println(student);
         command.undo();
         System.out.println(student);
-        command.undo();
-        System.out.println(student);
-        command.undo();
-        command.undo();
-        command.undo();
+
         command.undo();
         System.out.println(student);
 
-        command = new Student.AddGradeCommand(student1);
-        command.add(5);
-        command.add(5);
-        command.add(5);
+        command.undo();
+        System.out.println(student);
 
-        System.out.println(student1);
         command.undo();
-        System.out.println(student1);
-        command.undo();
-        System.out.println(student1);
-        command.undo();
-        command.undo();
-        command.undo();
-        command.undo();
-        System.out.println(student1);
+        System.out.println(student);
 
 
 

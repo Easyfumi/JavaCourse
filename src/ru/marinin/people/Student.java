@@ -32,13 +32,14 @@ public class Student implements Compare, Cloneable {
         grades.remove(index);
     }
 
-    private void addGrade(int grade) {
+    public Integer addGrade(int grade) {
         grades.add(grade);
+        return grade;
     }
 
-    public static class AddGradeCommand implements Command{
-        /// private static List<Command> undoList = new ArrayList<>();
-        private static List<Integer> addedGrades = new ArrayList<>();
+    public static class AddGradeCommand {
+        private static List<Command> undoList = new ArrayList<>();
+     //   private static List<Integer> addedGrades = new ArrayList<>();
         int count = -1;
         private Student student;
 
@@ -46,20 +47,24 @@ public class Student implements Compare, Cloneable {
             this.student = student;
         }
 
-        @Override
-        public void add(int grade) {
-            addedGrades.add(grade);
-            student.addGrade(grade);
+
+
+        public void add(Command command) {
+            undoList.add(command);
+            undoList.get(undoList.size()-1).push(student);
+            undoList.get(undoList.size()-1);
             count++;
         }
 
-        @Override
+
         public void undo() {
             if (count>=0) {
-                int grade = addedGrades.get(addedGrades.size()-1);
-                addedGrades.remove(addedGrades.size()-1);
+                Command command = undoList.get(undoList.size()-1);
+                int grade = command.push(student);
+                undoList.remove(undoList.size()-1);
                 int indexGrade = student.getGrades().lastIndexOf(grade);
                 student.removeGrade(indexGrade);
+                student.removeGrade(indexGrade-1);
                 count--;
             }
 
