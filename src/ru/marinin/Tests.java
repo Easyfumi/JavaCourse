@@ -345,30 +345,49 @@ class Tests {
 
     static void testStudentCache() {
         Student student = new Student("Oleg", 4,4,5,5);
-        Student student1 = new Student("Ivan", 2,2,3,4);
 
-        student.save();
+        System.out.println(student);
+        student.setName("Vasya");
+        System.out.println(student);
+        student.undo();
+        System.out.println(student);
+        student.addGrade(2);
+        student.addGrade(3);
         Save save = student.getSave();
-        System.out.println(save);
-
-        Student.AddGradeCommand command = new Student.AddGradeCommand(student);
-
-        command.add(x -> x.addGrade(2));
-        command.add(x -> x.addGrade(3));
-        command.add(x -> x.addGrade(4));
-
         System.out.println(student);
-        command.undo();
+        student.undo();
+        System.out.println(student);
+        student.removeGrade(1);
+        System.out.println(student);
+        student.undo();
+        System.out.println(student);
+        student.undo();
+        student.undo();
+        student.undo();
+        System.out.println(student);
+        student.undo();
+        student.undo();
+        student.addGrade(1,2,3);
+        System.out.println(student);
+        student.undo();
+        System.out.println(student);
+        student.setName("Ivan");
+        student.addGrade(1,2,3);
+        System.out.println(student);
+        student.undo();
+        System.out.println(student);
+        student.undo();
+        System.out.println(student);
+        save.load();
+        System.out.println(student);
+        student.undo();
+        System.out.println(student);
+        student.setName("Ivan");
+        student.addGrade(1,2,3);
+        System.out.println(student);
+        student.undo();
         System.out.println(student);
 
-        command.undo();
-        System.out.println(student);
-
-        command.undo();
-        System.out.println(student);
-
-        command.undo();
-        System.out.println(student);
 
 
 

@@ -1,73 +1,73 @@
 package ru.marinin.people;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import javax.swing.*;
+import java.util.*;
 
 public class Student implements Compare, Cloneable {
     private String name;
-    private List<Integer> grades;
-    private Save save;
+    private List<Integer> grades = new ArrayList<>();
+    private Deque<Action> actions = new ArrayDeque<>();
+    private int undoCounter = -1;
 
     public Student(String name, Integer... args) {
         this.name = name;
         this.grades = new ArrayList<>(Arrays.asList(args));
     }
-    public void save(){
-        this.save = new Save(this);
-    }
-    public Save getSave() {
-        return save;
-    }
+
     public String getName() {
         return name;
     }
     public void setName(String name) {
+        String tmp = this.name;
+        actions.push(()->this.name=tmp);
+        undoCounter++;
         this.name = name;
     }
+
     public List<Integer> getGrades() {
         return new ArrayList(grades);
     }
-    private void removeGrade(int index) {
+    public void removeGrade(int index) {
+        int grade = grades.get(index);
+        actions.push(()->grades.add(index,grade));
+        undoCounter++;
         grades.remove(index);
     }
 
-    public Integer addGrade(int grade) {
-        grades.add(grade);
-        return grade;
+    public void addGrade(int... grades) {
+        int count = grades.length;
+        for (int i=0; i<count; i++) {
+            this.grades.add(grades[i]);
+        }
+        actions.push(()-> {
+            for (int i = 0; i < count; i++)
+                this.grades.removeLast();
+        });
+        undoCounter++;
     }
 
-    public static class AddGradeCommand {
-        private static List<Command> undoList = new ArrayList<>();
-     //   private static List<Integer> addedGrades = new ArrayList<>();
-        int count = -1;
-        private Student student;
 
-        public AddGradeCommand(Student student) {
-            this.student = student;
+
+    public void undo() {
+        if (undoCounter>=0) {
+            actions.pop().make();
+            undoCounter--;
         }
+    }
+    public Save getSave() {
+        return new SaveImpl();
+    }
 
+    public class SaveImpl implements Save {
+        String name = Student.this.name;
+        List<Integer> grades = new ArrayList<>(Student.this.grades);
 
-
-        public void add(Command command) {
-            undoList.add(command);
-            undoList.get(undoList.size()-1).push(student);
-            undoList.get(undoList.size()-1);
-            count++;
-        }
-
-
-        public void undo() {
-            if (count>=0) {
-                Command command = undoList.get(undoList.size()-1);
-                int grade = command.push(student);
-                undoList.remove(undoList.size()-1);
-                int indexGrade = student.getGrades().lastIndexOf(grade);
-                student.removeGrade(indexGrade);
-                student.removeGrade(indexGrade-1);
-                count--;
-            }
-
+        @Override
+        public void load() {
+            Student.this.name = name;
+            Student.this.grades = new ArrayList<>(grades);
+            Student.this.actions.clear();
+            Student.this.undoCounter = -1;
         }
     }
 
