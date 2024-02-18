@@ -393,10 +393,10 @@ class Tests {
     static void streamOne() {
         List<Point> pointList = new ArrayList<>();
 
-        pointList.add(new Point(7,1));
+        pointList.add(new Point(7,-1));
         pointList.add(new Point(1,1));
         pointList.add(new Point(11,-11));
-        pointList.add(new Point(1,1));
+        pointList.add(new Point(-1,1));
         pointList.add(new Point(9,0));
         pointList.add(new Point(1,1));
 
