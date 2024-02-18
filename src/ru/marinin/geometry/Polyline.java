@@ -13,6 +13,10 @@ public class Polyline<T extends Point> implements Polylineable, Moveable {
         this.poitns = new ArrayList<>(Arrays.asList(points));
     }
 
+    public Polyline(List<T> list) {
+        this.poitns = new ArrayList<>(list);
+    }
+
 
     @Override
     public boolean equals(Object o) {

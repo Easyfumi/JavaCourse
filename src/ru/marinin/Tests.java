@@ -15,9 +15,10 @@ import ru.marinin.work.Department;
 import ru.marinin.work.Employee;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.sql.Array;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class Tests {
     static public void test_cities() {
@@ -387,10 +388,28 @@ class Tests {
         System.out.println(student);
         student.undo();
         System.out.println(student);
+    }
 
+    static void streamOne() {
+        List<Point> pointList = new ArrayList<>();
 
+        pointList.add(new Point(7,1));
+        pointList.add(new Point(1,1));
+        pointList.add(new Point(11,-11));
+        pointList.add(new Point(1,1));
+        pointList.add(new Point(9,0));
+        pointList.add(new Point(1,1));
+
+        Polyline<Point> points = new Polyline<>(pointList.stream()
+                .distinct()
+                .sorted((o1, o2) -> o1.x - o2.x)
+                .map(point -> new Point(point.x, Math.abs(point.y)))
+                .collect(Collectors.toList()));
+
+        System.out.println(points);
 
 
     }
+
 
 }
