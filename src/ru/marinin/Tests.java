@@ -14,7 +14,12 @@ import ru.marinin.people.Student;
 import ru.marinin.work.Department;
 import ru.marinin.work.Employee;
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Array;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -405,9 +410,18 @@ class Tests {
                 .sorted((o1, o2) -> o1.x - o2.x)
                 .map(point -> new Point(point.x, Math.abs(point.y)))
                 .collect(Collectors.toList()));
-
         System.out.println(points);
+    }
 
+    static void streamTwo() throws IOException {
+        // еще по хорошему сделать проверку, что номер это действительно номер, но я не успеваю =(
+        Path path = Path.of("test.txt");
+        var res = Files.lines(path)
+                .map(l -> l.split(":"))
+                .filter(array -> array.length>1)
+                .map(array -> new String[]{array[0].substring(0,1).toUpperCase() + array[0].substring(1).toLowerCase(), array[1]})
+                .collect(Collectors.groupingBy(array -> array[1], Collectors.mapping(array -> array[0], Collectors.toList())));
+        System.out.println(res);
 
     }
 
