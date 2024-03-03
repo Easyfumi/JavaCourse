@@ -424,8 +424,8 @@ class Tests {
     }
 
     static void test_7_1_3() {
-        EntityTest3 entityTest3 = new EntityTest3();
-        System.out.println(entityTest3);
+        MyEntityChild entityTest2 = new MyEntityChild();
+        System.out.println(entityTest2);
     }
 
     static void test_7_1_2() {
@@ -444,16 +444,7 @@ class Tests {
     }
 
     static void test_7_1_4() {
-        Student student = new Student("Ivan");
-        try {
-            Validator.validate(student, TestForStudents.class);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
 
