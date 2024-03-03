@@ -6,6 +6,7 @@ import ru.marinin.entities.Storage;
 import ru.marinin.geometry.*;
 
 import ru.marinin.people.Save;
+import ru.marinin.reflection.*;
 import ru.marinin.utils.Utils;
 import ru.marinin.utils.utilsService.Applyable;
 import ru.marinin.utils.utilsService.Testable;
@@ -14,16 +15,13 @@ import ru.marinin.people.Student;
 import ru.marinin.work.Department;
 import ru.marinin.work.Employee;
 
-import java.io.EOFException;
-import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.sql.Array;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 class Tests {
     static public void test_cities() {
@@ -423,6 +421,41 @@ class Tests {
                 .collect(Collectors.groupingBy(array -> array[1], Collectors.mapping(array -> array[0], Collectors.toList())));
         System.out.println(res);
 
+    }
+
+    static void test_7_1_3() {
+        EntityTest2 entityTest2 = new EntityTest2();
+        System.out.println(entityTest2);
+        EntityTest3 entityTest3 = new EntityTest3();
+        System.out.println(entityTest3);
+    }
+
+    static void test_7_1_2() {
+        Line<Point> line1 = new Line<>(new Point(1,1) , new Point(9,9));
+        Line<Point> line2 = new Line<>(new Point(-40,-40), new Point(-100,-100));
+        System.out.println(line1);
+        System.out.println(line2);
+        Methods.lineConnector(line1,line2);
+        System.out.println(line1);
+        System.out.println(line2);
+
+        // line1.end.x=0;
+
+        System.out.println(line1);
+        System.out.println(line2);
+    }
+
+    static void test_7_1_4() {
+        Student student = new Student("Ivan");
+        try {
+            Validator.validate(student, TestForStudents.class);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
