@@ -424,8 +424,6 @@ class Tests {
     }
 
     static void test_7_1_3() {
-        EntityTest2 entityTest2 = new EntityTest2();
-        System.out.println(entityTest2);
         EntityTest3 entityTest3 = new EntityTest3();
         System.out.println(entityTest3);
     }
@@ -435,7 +433,7 @@ class Tests {
         Line<Point> line2 = new Line<>(new Point(-40,-40), new Point(-100,-100));
         System.out.println(line1);
         System.out.println(line2);
-        Methods.lineConnector(line1,line2);
+        reflectionUtils.lineConnector(line1,line2);
         System.out.println(line1);
         System.out.println(line2);
 

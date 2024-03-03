@@ -1,7 +1,10 @@
 package ru.marinin.reflection;
 
 
+import ru.marinin.reflection.annotations.ToString;
+
 public class EntityTest2 extends EntityTest1 {
-    private String str2 = "string from entity test 2";
-    public int entityCount2 = 2;
+    @ToString(NeedToString.NO)
+    private String str2 = "s2";
+    private int ent2 = 2;
 }

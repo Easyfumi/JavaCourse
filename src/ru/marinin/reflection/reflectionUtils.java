@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Methods {
+public class reflectionUtils {
     public static List feildCollection(Object object) {
+
         List<Class> list = new ArrayList<>();
         List<Field> fieldList = new ArrayList<>();
 
